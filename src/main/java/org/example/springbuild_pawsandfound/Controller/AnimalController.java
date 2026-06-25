@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/animals")
+@RestController
+@RequestMapping("/animalshelter")
 public class AnimalController {
     private final AnimalRepository animalRepository;
 
@@ -29,6 +29,16 @@ public class AnimalController {
                     "<input type = 'submit' >"+
                 "</form>" ;
     }
+
+    @PostMapping("form")
+    //    public String handleForm(String name, int age){
+    //        return "Hello : "+ name + " ! You are "+ age + " Years old!";
+    //    }
+    public String handleForm(AnimalShelter animal){
+        animalRepository.save(animal);
+        return "Hello : "+ animal.getName() + " ! You are "+ animal.getAge() + " Years old!";
+    }
+
 
     @GetMapping("/animals")
     public List<AnimalShelter> getAllItems() {
