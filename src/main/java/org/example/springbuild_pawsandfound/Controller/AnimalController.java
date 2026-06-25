@@ -40,7 +40,7 @@ public class AnimalController {
     }
 
 
-    @GetMapping("/animals")
+    @GetMapping("animals")
     public List<AnimalShelter> getAllItems() {
         return animalRepository.findAll();
     }

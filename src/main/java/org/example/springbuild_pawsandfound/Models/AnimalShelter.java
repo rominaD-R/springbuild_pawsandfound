@@ -13,6 +13,8 @@ public class AnimalShelter {
     private String species;
     private int age;
 
+    public AnimalShelter() {}
+
     public AnimalShelter(int age, String species, String name) {
         this.age = age;
         this.species = species;
