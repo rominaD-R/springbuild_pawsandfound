@@ -1,12 +1,14 @@
 package org.example.springbuild_pawsandfound.Controller;
 
 
+import org.example.springbuild_pawsandfound.Models.AnimalShelter;
 import org.example.springbuild_pawsandfound.Repository.AnimalRepository;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/animals")
 public class AnimalController {
     private final AnimalRepository animalRepository;
@@ -15,32 +17,38 @@ public class AnimalController {
         this.animalRepository = animalRepository;
     }
 
-    @GetMapping("/animal/submit")
-    public List<Animal> renderForm() {
-        return """<form>
-                <label>Name:</label>
-                </form>""";
+    @GetMapping("/form")
+    public String getForm() {
+        return  "<form method = 'post'>" +
+                    "<label> Enter name: "
+                    + "<input type ='text' name = 'name'> " +
+                    "<label> Enter age: "+
+                    "<input type = 'number' name = 'age'> " +
+                    "<label> Enter species: " +
+                    "<input type = 'text' name = 'species'> "+
+                    "<input type = 'submit' >"+
+                "</form>" ;
     }
 
     @GetMapping("/animals")
-    public List<Animal> getAllItems() {
+    public List<AnimalShelter> getAllItems() {
         return animalRepository.findAll();
     }
 
     @GetMapping("/animals/{id}")
-    public Animal getItem(@PathVariable int id) {
+    public AnimalShelter getItem(@PathVariable int id) {
         return animalRepository.findById(id).orElse(null);
     }
 
     @PostMapping("/animals")
-    public Animal addItem(@RequestBody Animal animal) {
-        return animalRepository.save(movie);
+    public AnimalShelter addItem(@RequestBody AnimalShelter animal) {
+        return animalRepository.save(animal);
     }
 
     @PutMapping("/animals/{id}")
-    public Animal updateItem(@PathVariable int id, @RequestBody Animal animal) {
-        book.setId(id);
-        return animalRepository.save(book);
+    public AnimalShelter updateItem(@PathVariable int id, @RequestBody AnimalShelter animal) {
+        animal.setId(id);
+        return animalRepository.save(animal);
     }
 
     @DeleteMapping("/animals/{id}")

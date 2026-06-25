@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class AnimalShelter {
 
     @Id
-    @GeneratedValue(Strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
