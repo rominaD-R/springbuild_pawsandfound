@@ -2,6 +2,8 @@ package org.example.springbuild_pawsandfound.Models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class AnimalShelter {
 
@@ -51,5 +53,16 @@ public class AnimalShelter {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Applicant> applicants;
+
+    public List<Applicant> getApplicants() {
+        return applicants;
+    }
+
+    public void setApplicants(List<Applicant> applicants) {
+        this.applicants = applicants;
     }
 }

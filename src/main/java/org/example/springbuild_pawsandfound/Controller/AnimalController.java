@@ -2,6 +2,7 @@ package org.example.springbuild_pawsandfound.Controller;
 
 
 import org.example.springbuild_pawsandfound.Models.AnimalShelter;
+import org.example.springbuild_pawsandfound.Models.Applicant;
 import org.example.springbuild_pawsandfound.Repository.AnimalRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,6 @@ public class AnimalController {
     }
 
     @PostMapping("form")
-    //    public String handleForm(String name, int age){
-    //        return "Hello : "+ name + " ! You are "+ age + " Years old!";
-    //    }
     public String handleForm(AnimalShelter animal){
         animalRepository.save(animal);
         return "Hello : "+ animal.getName() + " ! You are "+ animal.getAge() + " Years old!";
@@ -48,6 +46,11 @@ public class AnimalController {
     @GetMapping("/animals/{id}")
     public AnimalShelter getItem(@PathVariable int id) {
         return animalRepository.findById(id).orElse(null);
+    }
+
+    @GetMapping("/{id}/applicants")
+    public List<Applicant> getApplicants(@PathVariable int id) {
+        return animalRepository.findById(id).get().getApplicants();
     }
 
     @PostMapping("/animals")
